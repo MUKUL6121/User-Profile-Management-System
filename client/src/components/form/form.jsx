@@ -4,7 +4,8 @@ import Filter from './Filter.js'
 import axios from 'axios'
 
 export default function Form() {
-    const server_url = "https://user-profile-management-system.onrender.com";
+    // const server_url = "https://user-profile-management-system.onrender.com";
+    const server_url =" https://user-profile-management-system.onrender.com/";
     const [action, setaction] = useState('All');
     const [preid, setpreid] = useState('');
     const [eid, seteid] = useState('');
