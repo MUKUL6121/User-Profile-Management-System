@@ -38,12 +38,12 @@ export default function Form() {
                 await fetchAllUsers();
             }
             else if (action === "Find") {
-                const res = await axios.get(`${server_url}users/${eid}`);
+                const res = await axios.get(`${server_url}user/${eid}`);
                 setdata(res.data);
                 // await fetchAllUsers();
             }
             else if (action === "Create") {
-                const res = await axios.get(`${server_url}users`);
+                const res = await axios.get(`${server_url}user`);
                 const users = res.data;
                 if (users.some(user => user.eid === eid)) {
                     alert("User already exists");
@@ -55,7 +55,7 @@ export default function Form() {
             }
             else if (action === "Delete") {
                 if (eid === '000') {
-                    await axios.delete(`${server_url}users`);
+                    await axios.delete(`${server_url}user`);
                 } else {
                     await axios.delete(`${server_url}user/${eid}`);
                 }
