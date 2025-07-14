@@ -3,7 +3,8 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-var corsoptions = ['https://user-profile-management-system-1.onrender.com','https://user-profile-management-system-1.onrender.com/'],
+var corsoptions = {
+    origin : ['https://user-profile-management-system-1.onrender.com','https://user-profile-management-system-1.onrender.com/'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     // optionsSuccessStatus: 200
 };
