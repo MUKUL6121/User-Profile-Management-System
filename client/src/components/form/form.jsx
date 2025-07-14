@@ -20,7 +20,8 @@ export default function Form() {
 
     async function fetchAllUsers() {
         try {
-            const res = await axios.get(`${server_url}/users`);
+            const res = await axios.get(`${server_url}users`);
+            
             setdata(res.data);
             setpreid('')
             seteid('')
@@ -37,12 +38,12 @@ export default function Form() {
                 await fetchAllUsers();
             }
             else if (action === "Find") {
-                const res = await axios.get(`${server_url}/${eid}`);
+                const res = await axios.get(`${server_url}users/${eid}`);
                 setdata(res.data);
                 // await fetchAllUsers();
             }
             else if (action === "Create") {
-                const res = await axios.get(`${server_url}/users`);
+                const res = await axios.get(`${server_url}users`);
                 const users = res.data;
                 if (users.some(user => user.eid === eid)) {
                     alert("User already exists");
@@ -54,14 +55,14 @@ export default function Form() {
             }
             else if (action === "Delete") {
                 if (eid === '000') {
-                    await axios.delete(`${server_url}/users`);
+                    await axios.delete(`${server_url}users`);
                 } else {
-                    await axios.delete(`${server_url}/${eid}`);
+                    await axios.delete(`${server_url}user/${eid}`);
                 }
                 await fetchAllUsers();
             }
             else if (action === "Update") {
-                await axios.patch(`${server_url}/${preid}`, { eid, name, sal: +salary });
+                await axios.patch(`${server_url}${preid}`, { eid, name, sal: +salary });
                 await fetchAllUsers()
             }
         } catch (err) {
