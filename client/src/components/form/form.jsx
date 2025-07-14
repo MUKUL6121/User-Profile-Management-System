@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export default function Form() {
     // const server_url = "https://user-profile-management-system.onrender.com";
-    const server_url =" https://user-profile-management-system.onrender.com/";
+    const server_url = "https://user-profile-management-system.onrender.com/";
     const [action, setaction] = useState('All');
     const [preid, setpreid] = useState('');
     const [eid, seteid] = useState('');
@@ -49,7 +49,7 @@ export default function Form() {
                     alert("User already exists");
                 } else {
                     seteid(res.data.length + 1)
-                    await axios.post(`${server_url}user`, { eid, name, sal: +salary });
+                    await axios.post(`${server_url}user`, { req.body });
                     await fetchAllUsers();
                 }
             }
@@ -62,7 +62,7 @@ export default function Form() {
                 await fetchAllUsers();
             }
             else if (action === "Update") {
-                await axios.patch(`${server_url}${preid}`, { eid, name, sal: +salary });
+                await axios.patch(`${server_url}user/${preid}`, { eid, name, sal: +salary });
                 await fetchAllUsers()
             }
         } catch (err) {
