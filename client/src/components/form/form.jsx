@@ -49,7 +49,7 @@ export default function Form() {
                     alert("User already exists");
                 } else {
                     seteid(res.data.length + 1)
-                    await axios.post(`${server_url}/user`, { eid, name, sal: +salary });
+                    await axios.post(`${server_url}user`, { eid, name, sal: +salary });
                     await fetchAllUsers();
                 }
             }
