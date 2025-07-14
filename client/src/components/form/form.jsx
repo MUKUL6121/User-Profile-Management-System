@@ -4,6 +4,7 @@ import Filter from './Filter.js'
 import axios from 'axios'
 
 export default function Form() {
+    const server_url = "https://user-profile-management-system.onrender.com";
     const [action, setaction] = useState('All');
     const [preid, setpreid] = useState('');
     const [eid, seteid] = useState('');
@@ -18,7 +19,7 @@ export default function Form() {
 
     async function fetchAllUsers() {
         try {
-            const res = await axios.get('http://localhost:5000/users');
+            const res = await axios.get(`${server_url}/users`);
             setdata(res.data);
             setpreid('')
             seteid('')
@@ -35,31 +36,31 @@ export default function Form() {
                 await fetchAllUsers();
             }
             else if (action === "Find") {
-                const res = await axios.get(`http://localhost:5000/user/${eid}`);
+                const res = await axios.get(`${server_url}/${eid}`);
                 setdata(res.data);
                 // await fetchAllUsers();
             }
             else if (action === "Create") {
-                const res = await axios.get('http://localhost:5000/users');
+                const res = await axios.get(`${server_url}/users`);
                 const users = res.data;
                 if (users.some(user => user.eid === eid)) {
                     alert("User already exists");
                 } else {
                     seteid(res.data.length + 1)
-                    await axios.post('http://localhost:5000/user', { eid, name, sal: +salary });
+                    await axios.post(`${server_url}/user`, { eid, name, sal: +salary });
                     await fetchAllUsers();
                 }
             }
             else if (action === "Delete") {
                 if (eid === '000') {
-                    await axios.delete('http://localhost:5000/users');
+                    await axios.delete(`${server_url}/users`);
                 } else {
-                    await axios.delete(`http://localhost:5000/user/${eid}`);
+                    await axios.delete(`${server_url}/${eid}`);
                 }
                 await fetchAllUsers();
             }
             else if (action === "Update") {
-                await axios.patch(`http://localhost:5000/user/${preid}`, { eid, name, sal: +salary });
+                await axios.patch(`${server_url}/${preid}`, { eid, name, sal: +salary });
                 await fetchAllUsers()
             }
         } catch (err) {
