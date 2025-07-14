@@ -22,6 +22,9 @@ async function connectToDB() {
 const database = 'user_data';
 const collection = 'user_detail';
 
+app.get('/',(req,res)=>{
+    res.send('<h2><a href="/users">users</a></h2>')
+})
 app.get('/users', async (req, res) => {
     try {
         const employees = await client.db(database).collection(collection).find({}).toArray();
