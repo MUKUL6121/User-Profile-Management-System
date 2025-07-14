@@ -8,7 +8,7 @@ var corsoptions = {
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     // optionsSuccessStatus: 200
 };
-app.use('*',cors(corsoptions));
+app.use(cors(corsoptions));
 
 const { MongoClient } = require('mongodb');
 // const client = new MongoClient('mongodb://localhost:27017/');
