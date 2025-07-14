@@ -1,0 +1,171 @@
+import Dataset from '../data_table/dataset.jsx'
+import { useEffect, useState } from 'react';
+import Filter from './Filter.js'
+import axios from 'axios'
+export default function Form() {
+const [action, setaction] = useState('All');
+const [preid, setpreid] = useState('');
+const [eid, seteid] = useState('');
+const [name, setname] = useState('');
+const [salary, setsalary] = useState('');
+const [data, setdata] = useState()              ;
+useEffect(() => {
+Filter()
+CURD()
+}, [])
+
+async function CURD() {
+var Response = await axios.get('http://localhost:5000/users');
+var users = Response.data                                      ;
+if (action === "All") {
+axios.get('http://localhost:5000/users')
+.then((res) => {
+let users = res.data                                           ;
+console.log(users)                                             ;
+setdata(users)
+})
+.catch((err) => {
+console.log(err)
+})
+}
+else if (action === "Find") {
+try {
+
+axios.get(http://localhost:5000/user/${eid})
+.then((res) => {
+let users = Array.isArray(res.data)                         ;
+console.log(res.data)                                       ;
+setdata(users)
+})
+.catch((err) => {
+console.log(err, preid)
+})
+}
+catch (err) {
+console.log('data not found', err)
+}
+}
+else if (action === "Create") {
+var data_set = { "eid": eid, "name": name, "sal": +salary } ;
+try {
+if (users.some((a) => a.eid == eid)) {
+console.log("user exist");
+} else {
+axios.post(http://localhost:5000/user, data_set)
+.then((res) => {
+let users = res.data                                        ;
+console.log(res.data)                                       ;
+setdata(users)
+})
+.catch((err) => {
+console.log(err)
+})
+}
+}
+catch (err) {
+console.log('data not found', err)
+}
+} else if (action === "Delete") {
+try {
+if (eid == '000') {
+axios.delete(http://localhost:5000/users)
+.then((res) => {
+let users = res.data                                        ;
+console.log(res.data)                                       ;
+setdata(users)
+})
+.catch((err) => {
+console.log(err)
+})
+}
+else {
+axios.delete(http://localhost:5000/user/${eid})
+.then((res) => {
+let users = res.data                                        ;
+console.log(res.data)                                       ;
+setdata(users)
+})
+}
+}
+catch (err) {
+console.log('data not found', err)
+}
+}
+}
+
+function handleAction(e) {
+e.preventDefault()         ;
+Filter()
+// alert('called')
+CURD()
+}
+
+return (
+<div className='d-flex gap-3'>
+<div className="container gap-3 border border-3 border-black rounded p-2 justify-content-center " style={{ minWidth: '200px', maxWidth: '350px' }}>
+<form action="" onSubmit={handleAction}>
+{/* select element */}
+<div className="row">
+<div className="container col-md-10 text-center p-2">
+<div>
+<label htmlFor="actionSelect" className="form-label">
+<h4>Select Action</h4>
+</label>
+</div>
+<div>
+<select className="form-select" id="actionSelect" onChange={(e) => {
+const newAction = e.target.value                                                                                                                    ;
+setaction(newAction)                                                                                                                                ;
+console.log("Selected action (from event):", newAction)                                                                                             ;
+Filter()                                                                                                                                            ;               // update your DOM‑based show/hide logic
+}} required>
+<option value="All">All Data</option>
+<option value="Find">Find</option>
+<option value="Create">Create</option>
+<option value="Delete">Delete</option>
+<option value="Update">Update</option>
+</select>
+</div>
+</div>
+</div>
+
+{/* input elements */}
+<div className=" justify-content-center">
+{/* row1 */}
+<div className="row p-2 justify-content-center">
+<div id='input1' className="col-md-5">
+<label htmlFor="preid" className="form-label fw-bold">Previous ID</label>
+<input id="preid" name='preid' type="text" onChange={(e) => { setpreid(e.target.value)                   ; }} className="form-control border border-1 border-black" required />
+</div>
+<div id='input2' className="col-md-5">
+<label htmlFor="eid" className="form-label fw-bolder"> E_ID</label>
+<input id="eid" name="eid" type="text" value={eid} onChange={(e) => { seteid(e.target.value)             ; }} className="form-control border border-1 border-black" required />
+</div>
+</div>
+{/* row2 */}
+<div className="row mb-3 justify-content-center">
+<div id="input3" className="col-md-5">
+<label htmlFor="name" className="form-label fw-bolder">Name</label>
+<input id="name" name='name' type="text" value={name} onChange={(e) => { setname(e.target.value)         ; }} className="form-control border border-1 border-black" required />
+</div>
+<div id="input4" className="col-md-5">
+<label htmlFor="salary" className="form-label fw-bolder">Salary</label>
+<input id="salary" name="salary" type="text" value={salary} onChange={(e) => { setsalary(e.target.value) ; }} className="form-control border border-1 border-black" required />
+</div>
+</div>
+</div>
+
+{/* button */}
+<button className="btn btn-danger m-2" type='submit'>Submit</button>
+</form>
+
+</div>
+<div>
+<Dataset className="p-3 bg-light w-25"
+style={{ minWidth: "50%", maxWidth: "100%" }}
+data={data}
+/>
+</div>
+</div>
+)
+}

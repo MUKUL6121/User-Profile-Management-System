@@ -1,0 +1,26 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "server for testing",
+  "license": "ISC",
+  "author": "mukul",
+  "type": "commonjs",
+  "main": "3400",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "http": "^0.0.1-security",
+    "minimist": "^1.2.8",
+    "mongodb": "^6.17.0",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.10",
+    "pug": "^3.0.3"
+  }
+}

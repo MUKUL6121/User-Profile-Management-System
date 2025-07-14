@@ -1,0 +1,13 @@
+1. start server steps:-
+ cd user_databse
+ cd server
+ nodemon server.js
+ //http://localhost:5000/users  - GET
+ //http://localhost:5000/user/:id - GET/DELETE/UPDATE
+ //http://localhost:5000/user  - POST
+
+2. start react "npm run dev" steps:-
+cd user_databse
+cd client
+npm run dev
+//http://localhost:5173
