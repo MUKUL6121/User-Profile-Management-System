@@ -43,7 +43,7 @@ export default function Form() {
                 // await fetchAllUsers();
             }
             else if (action === "Create") {
-                const res = await axios.get(`${server_url}user`);
+                const res = await axios.get(`${server_url}users`);
                 const users = res.data;
                 if (users.some(user => user.eid === eid)) {
                     alert("User already exists");
