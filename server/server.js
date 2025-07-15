@@ -7,7 +7,7 @@ const port= process.env.PORT || 3000;
 app.use(express.json());
 
 var corsoptions = {
-    origin: ['http://localhost:5173', 'https://user-profile-management-system-1.onrender.com'],
+    origin: ['http://localhost:5173', 'https://user-profile-management-system-1.onrender.com/','https://user-profile-management-system-1.onrender.com'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     optionsSuccessStatus: 200
 };
