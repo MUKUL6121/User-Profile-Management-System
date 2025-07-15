@@ -16,7 +16,6 @@ app.use(cors(corsoptions));
 const { MongoClient } = require('mongodb');
 // const client = new MongoClient('mongodb://localhost:27017/');
 const client = new MongoClient(process.env.URI);
-// const client = new MongoClient(`mongodb+srv://mukuljangra1111:jA1BVK2fdprhrlgo@test-mycompany.dl8wtzk.mongodb.net/`);
 
 async function connectToDB() {
     try {
@@ -27,7 +26,6 @@ async function connectToDB() {
          console.log('Unable to connect to MongoDB:', err.message);
          // process.exit(1); // stop server if DB connection fails
     }
-
 };
 
 const database = 'user_data';
@@ -47,7 +45,7 @@ app.get('/users', async (req, res) => {
 });
 
 app.get('/user/:id', async (req, res) => {
-    const employeeId = +req.params.id;
+    const employeeId = req.params.id;
     try {
         const employees = await client.db(database).collection(collection).find({ eid: employeeId }).toArray();
         res.json(employees);
