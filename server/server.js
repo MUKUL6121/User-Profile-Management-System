@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 var corsoptions = {
-    origin : ['https://user-profile-management-system-1.onrender.com'],
+    origin : ['https://user-profile-management-system-1.onrender.com','http://localhost:5173'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     optionsSuccessStatus: 200
 };
