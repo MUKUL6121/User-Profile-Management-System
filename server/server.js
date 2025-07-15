@@ -64,7 +64,7 @@ app.post('/user', async (req, res) => {
 });
 
 app.patch('/user/:id', async (req, res) => {
-    const employeeId = +req.params.id;
+    const employeeId = req.params.id;
     const payload = req.body;
     try {
         await client.db(database).collection(collection).updateOne({ eid: employeeId }, { $set: payload }, { upsert: true });
@@ -75,7 +75,7 @@ app.patch('/user/:id', async (req, res) => {
 });
 
 app.delete('/user/:id', async (req, res) => {
-    const employeeId = +req.params.id;
+    const employeeId = req.params.id;
     try {
         await client.db(database).collection(collection).deleteOne({ eid: employeeId });
         res.send('User Deleted Successfully');
