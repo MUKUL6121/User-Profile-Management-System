@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 var corsoptions = {
-    origin : ['https://user-profile-management-system-1.onrender.com','http://localhost:5173'],
+    origin: ['http://localhost:5173', 'https://user-profile-management-system-1.onrender.com'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     optionsSuccessStatus: 200
 };
@@ -15,18 +15,20 @@ const { MongoClient } = require('mongodb');
 const client = new MongoClient('mongodb+srv://mukuljangra1111:jA1BVK2fdprhrlgo@test-mycompany.dl8wtzk.mongodb.net/')
 
 async function connectToDB() {
-    try{
-    await client.connect();
-    await console.log('Connected successfully to mongoDB');
-    }catch(err){
-        console.log("Unable to connect to MongoDB");
+    try {
+        await client.connect();
+        await console.log('Connected successfully to mongoDB');
     }
+    catch (err) {
+        console.log("Unable to connect to DB.")
+    }
+
 };
 
 const database = 'user_data';
 const collection = 'user_detail';
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.send('<h2><a href="/users">users</a></h2>')
 })
 app.get('/users', async (req, res) => {
