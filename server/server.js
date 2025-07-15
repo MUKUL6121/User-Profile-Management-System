@@ -15,7 +15,8 @@ app.use(cors(corsoptions));
 
 const { MongoClient } = require('mongodb');
 // const client = new MongoClient('mongodb://localhost:27017/');
-const client = new MongoClient(process.env.URI);
+// const client = new MongoClient(process.env.URI);
+const client = new MongoClient('mongodb+srv://mukuljangra1111:jA1BVK2fdprhrlgo@test-mycompany.dl8wtzk.mongodb.net/');
 
 async function connectToDB() {
     try {
