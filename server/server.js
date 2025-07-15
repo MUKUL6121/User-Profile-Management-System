@@ -4,9 +4,9 @@ const app = express();
 app.use(express.json());
 
 var corsoptions = {
-    origin : ['https://user-profile-management-system-1.onrender.com','https://user-profile-management-system-1.onrender.com/'],
+    origin : ['https://user-profile-management-system-1.onrender.com'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    // optionsSuccessStatus: 200
+    optionsSuccessStatus: 200
 };
 app.use(cors(corsoptions));
 
@@ -15,8 +15,12 @@ const { MongoClient } = require('mongodb');
 const client = new MongoClient('mongodb+srv://mukuljangra1111:jA1BVK2fdprhrlgo@test-mycompany.dl8wtzk.mongodb.net/')
 
 async function connectToDB() {
+    try{
     await client.connect();
     await console.log('Connected successfully to mongoDB');
+    }catch(err){
+        console.log("Unable to connect to MongoDB");
+    }
 };
 
 const database = 'user_data';
